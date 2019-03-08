@@ -3,7 +3,7 @@ const CONF = {
       port: 3306,
       user: 'root',
       db: 'toilet',
-      pass: 'root',
+      pass: '93pj6.29',
 }
 
 module.exports = CONF
