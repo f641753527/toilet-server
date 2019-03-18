@@ -12,7 +12,7 @@ module.exports = async (req, res, next) => {
 
   if (!user_name || !password) {
     response.errcode = -1;
-    response.errmsg = '输入信息不全或有误！'
+    response.errmsg = '输入信息不全或有误！';
     return res.send(response);
   }
 
@@ -24,12 +24,12 @@ module.exports = async (req, res, next) => {
     const users = await db.query(sql, [ user_name, password ]) || [];
     if (!users.length) {
       response.errcode = -1;
-      response.errmsg = '用户名或密码错误'
+      response.errmsg = '用户名或密码错误';
       return res.send(response);
     }
   } catch (error) {
     response.errcode = -1;
-    response.errmsg = '登录失败'
+    response.errmsg = '登录失败';
     return res.send(response);
   }
 
