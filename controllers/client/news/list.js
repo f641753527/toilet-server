@@ -5,7 +5,7 @@ module.exports = async (req, res, next) => {
 
   const { type, pageindex, pagesize } = req.query;
 
-  const sql = type ? 'select * from news where type = ?' : 'select * from news';
+  const sql = type ? 'select * from news where type = ? ORDER BY order_index DESC' : 'select * from news';
 
   let response = [];
 

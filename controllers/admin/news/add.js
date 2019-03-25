@@ -16,12 +16,26 @@ module.exports = async (req, res, next) => {
     return res.send(response);
   }
 
-  const sql = 'insert into news(title, cover_img, link, type, create_time) values(?,?,?,?,?)';
+  let sql = 'select * from news where type = ? order by order_index desc';
+
+  let order = 0;
+
+  try {
+    const list = await db.query(sql, [type]);
+    order = list && list.length ? list[0].order_index + 1 : 0;
+  } catch (error) {
+    response.errcode = -1;
+    response.errmsg = error.sqlMessage;
+    return res.send(response);
+  }
+
+
+  sql = 'insert into news(title, cover_img, link, type, create_time, order_index) values(?,?,?,?,?,?)';
 
   
 
   try {
-    await db.query(sql, [ title, cover_img, link, type, new Date().getTime()]);
+    await db.query(sql, [ title, cover_img, link, type, new Date().getTime(), order]);
   } catch (error) {
     response.errcode = -1;
     response.errmsg = error.sqlMessage;
